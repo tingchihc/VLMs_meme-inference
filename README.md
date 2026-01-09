@@ -14,7 +14,7 @@ Currently, the repository supports:
 
 ## How to Use the Code
 
-This folder explains how to run inference on meme datasets using the provided VLMs.
+This [folder](tutorial/README.md) explains how to run inference on meme datasets using the provided VLMs.
 
 ---
 
