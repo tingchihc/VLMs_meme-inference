@@ -11,6 +11,7 @@ Currently, the repository supports:
 - Qwen2-VL-7B-Instruct
 - InstructBLIP-Vicunna-7B
 - LLaVA-v1.5
+- LLaVA-v1.6-Vicuna
 ---
 
 ## How to Use the Code
