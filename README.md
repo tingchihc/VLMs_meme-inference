@@ -13,7 +13,7 @@ Currently, the repository supports:
 ---
 
 ## Results
-You can find the results from [Google Drive]([https://drive.google.com/your-file-link](https://drive.google.com/drive/u/0/folders/1i_JanAQyi_Ou8X7v12JxcCivEoAaD5cz)).
+You can find the results from [Google Drive](https://drive.google.com/drive/u/0/folders/1i_JanAQyi_Ou8X7v12JxcCivEoAaD5cz).
 
 <div align="center">
 
