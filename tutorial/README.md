@@ -8,8 +8,22 @@ cd VLMs_meme-inference
 ```
 
 ## 2. Create the Conda Environment 
-We have multiple conda environment. Here is the example for BLIP2-Flan-T5-xl.
+We have multiple Conda environments. Here is the example for BLIP2-Flan-T5-xl.
+
 ```
 conda env create -f blip2_environment.yml
 conda activate blip2_vqa
+```
+
+| VLMs                     | Conda Environment YAML        |
+|---------------------------|------------------------------|
+| BLIP2-Flan-T5-xl          | blip2_environment.yml        |
+| Qwen2-VL-7B-Instruct      | qwen2vl_blip2_environment.yml|
+
+
+
+## 3. Submit the Job
+
+```
+sbatch blip2_work.sh
 ```
