@@ -14,7 +14,6 @@ from transformers import (
 from typing import Dict, List, Tuple, Optional
 import re
 
-# Only needed for Qwen models
 try:
     from qwen_vl_utils import process_vision_info
 except ImportError:
@@ -27,7 +26,6 @@ class VLMInference:
         self.model, self.processor = self._load_model()
     
     def _load_model(self):
-        """Load the appropriate model and processor based on model_name"""
         if self.model_name == "BLIP2-Flan-T5-xl":
             processor = Blip2Processor.from_pretrained("Salesforce/blip2-flan-t5-xl")
             model = Blip2ForConditionalGeneration.from_pretrained(
@@ -83,7 +81,6 @@ class VLMInference:
             )
     
         elif self.model_name == "Qwen2.5-VL-7B-Instruct":
-            # Qwen2.5-VL needs AutoModel, not Qwen2VL
             processor = AutoProcessor.from_pretrained(
                 "Qwen/Qwen2.5-VL-7B-Instruct",
                 use_fast=True
@@ -95,7 +92,6 @@ class VLMInference:
             )
     
         elif self.model_name == "Qwen3-VL-8B-Instruct":
-            # Check if Qwen3 is available, otherwise use AutoModel
             processor = AutoProcessor.from_pretrained(
                 "Qwen/Qwen3-VL-8B-Instruct",
                 use_fast=True
@@ -160,7 +156,6 @@ class VLMInference:
         for pattern in patterns:
             matches = re.findall(pattern, response)
             if matches:
-                # Take the last match (usually the final answer)
                 predicted_letter = matches[-1].upper()
                 break
         
@@ -191,7 +186,6 @@ class VLMInference:
         # Format prompt
         prompt = self._format_prompt(question, multiple_choice_options)
         
-        # Model-specific inference
         if self.model_name in ["BLIP2-Flan-T5-xl", "InstructBLIP-Vicunna-7B"]:
             inputs = self.processor(images=image, text=prompt, return_tensors="pt").to(self.device, torch.float16)
             generated_ids = self.model.generate(**inputs, max_new_tokens=512)
@@ -213,7 +207,6 @@ class VLMInference:
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
 
         elif self.model_name == "LLaVA-v1.6-Vicuna":
-            # LLaVA-v1.6 (LlavaNext) uses simpler processing
             conversation = [
                 {
                     "role": "user",
@@ -227,21 +220,13 @@ class VLMInference:
             prompt_text = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
             inputs = self.processor(images=image, text=prompt_text, return_tensors="pt").to(self.device, torch.float16)
             
-            # Generate
             with torch.no_grad():
-                generated_ids = self.model.generate(
-                    **inputs,
-                    max_new_tokens=512,
-                    do_sample=False
-                )
+                generated_ids = self.model.generate(**inputs, max_new_tokens=512, do_sample=False)
             
-            # Decode only the generated part (exclude input prompt)
             generated_ids = generated_ids[:, inputs["input_ids"].shape[1]:]
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             
         elif self.model_name == "Pixtral-12B":
-            # Pixtral uses [IMG] token(s) - check what the processor expects
-            # Build the prompt with the image placeholder
             conversation = [
                 {
                     "role": "user", 
@@ -251,21 +236,10 @@ class VLMInference:
                     ]
                 }
             ]
+
+            prompt_text = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
             
-            # Use apply_chat_template to properly format the prompt
-            prompt_text = self.processor.apply_chat_template(
-                conversation, 
-                add_generation_prompt=True
-            )
-            
-            # Process inputs
-            inputs = self.processor(
-                text=prompt_text,
-                images=[image],  # Pass as list
-                return_tensors="pt"
-            )
-            
-            # Move inputs to device with correct dtypes
+            inputs = self.processor(text=prompt_text, images=[image],return_tensors="pt")
             inputs = {
                 k: v.to(self.device, dtype=torch.float16) if k == "pixel_values" 
                 else v.to(self.device)
@@ -273,14 +247,8 @@ class VLMInference:
             }
             
             with torch.no_grad():
-                generated_ids = self.model.generate(
-                    **inputs,
-                    max_new_tokens=512,
-                    do_sample=False,
-                    pad_token_id=self.processor.tokenizer.eos_token_id
-                )
+                generated_ids = self.model.generate(**inputs, max_new_tokens=512, do_sample=False, pad_token_id=self.processor.tokenizer.eos_token_id)
             
-            # Decode only the generated part
             generated_ids = generated_ids[:, inputs["input_ids"].shape[1]:]
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             
@@ -294,16 +262,11 @@ class VLMInference:
                     ]
                 }
             ]
+
             text = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             image_inputs, video_inputs = process_vision_info(messages)
-            inputs = self.processor(
-                text=[text],
-                images=image_inputs,
-                videos=video_inputs,
-                padding=True,
-                return_tensors="pt"
-            ).to(self.device)
-            
+            inputs = self.processor(text=[text], images=image_inputs, videos=video_inputs, padding=True, return_tensors="pt").to(self.device)
+
             generated_ids = self.model.generate(**inputs, max_new_tokens=512)
             generated_ids = [
                 output_ids[len(input_ids):] 
@@ -313,13 +276,7 @@ class VLMInference:
         
         return response
 
-def process_single_example(
-    vlm: VLMInference,
-    question: str,
-    meme_img: str,
-    multiple_choice_options: List[str],
-    answer: List[str]
-) -> Dict:
+def process_single_example(vlm: VLMInference, question: str, meme_img: str, multiple_choice_options: List[str], answer: List[str]) -> Dict:
     """
     Process a single example and return results
     
@@ -338,15 +295,9 @@ def process_single_example(
             - ground_truth: ['No toxicity detected']
             - full_response: Complete model output
     """
-    # Get model response
+
     response = vlm.infer(question, meme_img, multiple_choice_options)
-    
-    # Extract answer and CoT
     predicted_answer, cot = vlm._extract_answer_and_cot(response, multiple_choice_options)
-    
-    # Check if correct
-    # predicted_answer: 'No toxicity detected'
-    # answer: ['No toxicity detected']
     is_correct = predicted_answer in answer if predicted_answer else False
     
     return {
@@ -376,7 +327,6 @@ def run_test(jsonld_path, prefix, vlm, output_folder):
             if choice["is_correct"] == True:
                 answer.append(choice["text"])
         
-        # This is your format_
         format_ = {
             "question": question,
             "multiple_choice_options": multiple_choice_options,
@@ -386,7 +336,6 @@ def run_test(jsonld_path, prefix, vlm, output_folder):
             "meme_img": meme_img
         }
         
-        # Process this example using format_
         result = process_single_example(
             vlm, 
             format_["question"], 
@@ -395,7 +344,6 @@ def run_test(jsonld_path, prefix, vlm, output_folder):
             format_["answer"]
         )
         
-        # Add metadata
         result.update({
             "jsonld_file": jsonld_file,
             "question": question,
@@ -439,16 +387,10 @@ def main():
                 if files.startswith("."):
                     continue
                 if files.endswith(".jsonld"):
-                    jsonld_question_path.append(
-                        os.path.join(folder_path, files)
-                    )
+                    jsonld_question_path.append(os.path.join(folder_path, files))
     
     prefix = os.path.join(input_folder, "benchmark_imgs")
     run_test(jsonld_question_path, prefix, vlm, args.output_folder)
 
 if __name__ == "__main__":
     main()
-
-"""
-python VLMs_inference.py  --model_name BLIP2-Flan-T5-xl --conda_env blip2_vqa --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder BLIP2-Flan-T5-xl
-"""

@@ -10,6 +10,7 @@ Currently, the repository supports:
 - BLIP2-Flan-T5-xl
 - Qwen2-VL-7B-Instruct
 - Qwen2.5-VL-7B-Instruct
+- Qwen3-VL-8B-Instruct
 - InstructBLIP-Vicunna-7B
 - LLaVA-v1.5
 - LLaVA-v1.6-Vicuna

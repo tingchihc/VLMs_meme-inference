@@ -1,0 +1,5 @@
+/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/models/auto/modeling_auto.py:2284: FutureWarning: The class `AutoModelForVision2Seq` is deprecated and will be removed in v5.0. Please use `AutoModelForImageTextToText` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:06<00:20,  6.86s/it]Fetching 4 files:  50%|█████     | 2/4 [00:07<00:05,  2.92s/it]Fetching 4 files: 100%|██████████| 4/4 [00:07<00:00,  1.76s/it]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:04<00:12,  4.05s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:07<00:07,  3.99s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:12<00:04,  4.03s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:14<00:00,  3.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:14<00:00,  3.59s/it]
