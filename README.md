@@ -13,8 +13,13 @@ Currently, the repository supports:
 ---
 
 ## Results
+You can find the results from [Google Drive]([https://drive.google.com/your-file-link](https://drive.google.com/drive/u/0/folders/1i_JanAQyi_Ou8X7v12JxcCivEoAaD5cz)).
+
+<div align="center">
 
 | VLMs                     | Accuracy   |
-|---------------------------|-----------|
-| BLIP2-Flan-T5-xl          | 14.57%    |
-| Qwen2-VL-7B-Instruct      | 85.71%    |
+|--------------------------|-----------|
+| BLIP2-Flan-T5-xl         | 14.57%    |
+| Qwen2-VL-7B-Instruct     | 85.71%    |
+
+</div>
