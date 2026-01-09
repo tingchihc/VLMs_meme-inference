@@ -1,0 +1,4 @@
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:05<00:05,  5.47s/it]Fetching 2 files: 100%|██████████| 2/2 [00:05<00:00,  2.74s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:07<00:07,  7.69s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.61s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.77s/it]
