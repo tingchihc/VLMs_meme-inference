@@ -12,6 +12,7 @@ Currently, the repository supports:
 - InstructBLIP-Vicunna-7B
 - LLaVA-v1.5
 - LLaVA-v1.6-Vicuna
+- Pixtral-12B
 ---
 
 ## How to Use the Code
@@ -22,4 +23,3 @@ This [folder](tutorial/README.md) explains how to run inference on meme datasets
 
 ## Results
 You can find the results from [Google Drive](https://drive.google.com/drive/u/0/folders/1i_JanAQyi_Ou8X7v12JxcCivEoAaD5cz).
-

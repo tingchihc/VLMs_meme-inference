@@ -8,8 +8,7 @@ from transformers import (
     InstructBlipProcessor, InstructBlipForConditionalGeneration,
     AutoProcessor, LlavaForConditionalGeneration,
     LlavaNextProcessor, LlavaNextForConditionalGeneration,
-    Qwen2VLForConditionalGeneration,
-    AutoModelForVision2Seq
+    Qwen2VLForConditionalGeneration
 )
 from typing import Dict, List, Tuple, Optional
 import re
@@ -59,11 +58,17 @@ class VLMInference:
             ).to(self.device)
             
         elif self.model_name == "Pixtral-12B":
-            processor = AutoProcessor.from_pretrained("mistral-community/pixtral-12b")
-            model = AutoModelForVision2Seq.from_pretrained(
+            from transformers import LlavaForConditionalGeneration
+            processor = AutoProcessor.from_pretrained(
                 "mistral-community/pixtral-12b",
-                torch_dtype=torch.float16
-            ).to(self.device)
+                use_fast=False
+            )
+            model = LlavaForConditionalGeneration.from_pretrained(
+                "mistral-community/pixtral-12b",
+                torch_dtype=torch.float16,
+                device_map="auto",
+                trust_remote_code=True
+            )
             
         elif self.model_name == "Qwen2-VL-7B-Instruct":
             processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-7B-Instruct")
@@ -220,18 +225,48 @@ class VLMInference:
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             
         elif self.model_name == "Pixtral-12B":
-            messages = [
+            # Pixtral uses [IMG] token(s) - check what the processor expects
+            # Build the prompt with the image placeholder
+            conversation = [
                 {
-                    "role": "user",
+                    "role": "user", 
                     "content": [
                         {"type": "image"},
                         {"type": "text", "text": prompt}
                     ]
                 }
             ]
-            prompt_text = self.processor.apply_chat_template(messages, add_generation_prompt=True)
-            inputs = self.processor(images=image, text=prompt_text, return_tensors="pt").to(self.device, torch.float16)
-            generated_ids = self.model.generate(**inputs, max_new_tokens=512)
+            
+            # Use apply_chat_template to properly format the prompt
+            prompt_text = self.processor.apply_chat_template(
+                conversation, 
+                add_generation_prompt=True
+            )
+            
+            # Process inputs
+            inputs = self.processor(
+                text=prompt_text,
+                images=[image],  # Pass as list
+                return_tensors="pt"
+            )
+            
+            # Move inputs to device with correct dtypes
+            inputs = {
+                k: v.to(self.device, dtype=torch.float16) if k == "pixel_values" 
+                else v.to(self.device)
+                for k, v in inputs.items()
+            }
+            
+            with torch.no_grad():
+                generated_ids = self.model.generate(
+                    **inputs,
+                    max_new_tokens=512,
+                    do_sample=False,
+                    pad_token_id=self.processor.tokenizer.eos_token_id
+                )
+            
+            # Decode only the generated part
+            generated_ids = generated_ids[:, inputs["input_ids"].shape[1]:]
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             
         elif self.model_name in ["Qwen2-VL-7B-Instruct", "Qwen2.5-VL-7B-Instruct", "Qwen3-VL-8B-Instruct"]:

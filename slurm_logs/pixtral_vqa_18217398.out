@@ -1,4 +1,4 @@
-Fri Jan  9 19:18:39 2026       
+Fri Jan  9 20:26:22 2026       
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
 +-----------------------------------------+------------------------+----------------------+
@@ -7,7 +7,7 @@ Fri Jan  9 19:18:39 2026
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA H100                    On  |   00000000:C6:00.0 Off |                    0 |
-| N/A   32C    P0             67W /  700W |       0MiB /  95830MiB |      0%      Default |
+| N/A   33C    P0             68W /  700W |       0MiB /  95830MiB |      0%      Default |
 |                                         |                        |             Disabled |
 +-----------------------------------------+------------------------+----------------------+
 
@@ -18,7 +18,7 @@ Fri Jan  9 19:18:39 2026
 |=========================================================================================|
 |  No running processes found                                                             |
 +-----------------------------------------------------------------------------------------+
-Loading model: LLaVA-v1.6-Vicuna
+Loading model: Pixtral-12B
 [FINISH]  /home/tchen1/workshop/datasets/meme/benchmark_extracted/94351_qa/94351_ToxicityAssessment_qa_e25047a5.jsonld
 [FINISH]  /home/tchen1/workshop/datasets/meme/benchmark_extracted/48153_qa/48153_ToxicityAssessment_qa_1fdd65bb.jsonld
 [FINISH]  /home/tchen1/workshop/datasets/meme/benchmark_extracted/84395_qa/84395_ToxicityAssessment_qa_47079ca9.jsonld

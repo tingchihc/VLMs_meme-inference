@@ -22,6 +22,7 @@ conda activate blip2_vqa
 | InstructBLIP-Vicunna-7B.  | instructblip_environment.yml |
 | LLaVA-v1.5                | llava1.5_environment.yml     |
 | LLaVA-v1.6-Vicuna         | llava1.6_environment.yml     |
+| Pixtral-12B               | pixtral_environment.yml      |
 
 ## 3. Submit the Job
 
