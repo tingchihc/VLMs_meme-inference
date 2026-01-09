@@ -8,7 +8,8 @@ from transformers import (
     InstructBlipProcessor, InstructBlipForConditionalGeneration,
     AutoProcessor, LlavaForConditionalGeneration,
     LlavaNextProcessor, LlavaNextForConditionalGeneration,
-    Qwen2VLForConditionalGeneration
+    Qwen2VLForConditionalGeneration,
+    AutoModelForVision2Seq
 )
 from typing import Dict, List, Tuple, Optional
 import re
@@ -71,25 +72,39 @@ class VLMInference:
             )
             
         elif self.model_name == "Qwen2-VL-7B-Instruct":
-            processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-7B-Instruct")
+            processor = AutoProcessor.from_pretrained(
+                "Qwen/Qwen2-VL-7B-Instruct",
+                use_fast=True
+            )
             model = Qwen2VLForConditionalGeneration.from_pretrained(
                 "Qwen/Qwen2-VL-7B-Instruct",
-                torch_dtype=torch.float16
-            ).to(self.device)
-            
+                torch_dtype=torch.float16,
+                device_map="auto"
+            )
+    
         elif self.model_name == "Qwen2.5-VL-7B-Instruct":
-            processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
-            model = Qwen2VLForConditionalGeneration.from_pretrained(
+            # Qwen2.5-VL needs AutoModel, not Qwen2VL
+            processor = AutoProcessor.from_pretrained(
                 "Qwen/Qwen2.5-VL-7B-Instruct",
-                torch_dtype=torch.float16
-            ).to(self.device)
-            
+                use_fast=True
+            )
+            model = AutoModelForVision2Seq.from_pretrained(
+                "Qwen/Qwen2.5-VL-7B-Instruct",
+                torch_dtype=torch.float16,
+                device_map="auto"
+            )
+    
         elif self.model_name == "Qwen3-VL-8B-Instruct":
-            processor = AutoProcessor.from_pretrained("Qwen/Qwen3-VL-8B-Instruct")
-            model = Qwen2VLForConditionalGeneration.from_pretrained(
+            # Check if Qwen3 is available, otherwise use AutoModel
+            processor = AutoProcessor.from_pretrained(
                 "Qwen/Qwen3-VL-8B-Instruct",
-                torch_dtype=torch.float16
-            ).to(self.device)
+                use_fast=True
+            )
+            model = AutoModelForVision2Seq.from_pretrained(
+                "Qwen/Qwen3-VL-8B-Instruct",
+                torch_dtype=torch.float16,
+                device_map="auto"
+            )
         else:
             raise ValueError(f"Unknown model: {self.model_name}")
         
