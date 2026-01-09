@@ -7,6 +7,7 @@ from transformers import (
     Blip2Processor, Blip2ForConditionalGeneration,
     InstructBlipProcessor, InstructBlipForConditionalGeneration,
     AutoProcessor, LlavaForConditionalGeneration,
+    LlavaNextProcessor, LlavaNextForConditionalGeneration,
     Qwen2VLForConditionalGeneration,
     AutoModelForVision2Seq
 )
@@ -49,10 +50,12 @@ class VLMInference:
             ).to(self.device)
             
         elif self.model_name == "LLaVA-v1.6-Vicuna":
-            processor = AutoProcessor.from_pretrained("llava-hf/llava-v1.6-vicuna-7b-hf")
-            model = LlavaForConditionalGeneration.from_pretrained(
+            from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
+            processor = LlavaNextProcessor.from_pretrained("llava-hf/llava-v1.6-vicuna-7b-hf")
+            model = LlavaNextForConditionalGeneration.from_pretrained(
                 "llava-hf/llava-v1.6-vicuna-7b-hf",
-                torch_dtype=torch.float16
+                torch_dtype=torch.float16,
+                low_cpu_mem_usage=True
             ).to(self.device)
             
         elif self.model_name == "Pixtral-12B":
@@ -174,7 +177,7 @@ class VLMInference:
             generated_ids = self.model.generate(**inputs, max_new_tokens=512)
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             
-        elif self.model_name in ["LLaVA-v1.5", "LLaVA-v1.6-Vicuna"]:
+        elif self.model_name == "LLaVA-v1.5":
             conversation = [
                 {
                     "role": "user",
@@ -187,6 +190,33 @@ class VLMInference:
             prompt_text = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
             inputs = self.processor(images=image, text=prompt_text, return_tensors="pt").to(self.device, torch.float16)
             generated_ids = self.model.generate(**inputs, max_new_tokens=512)
+            response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+
+        elif self.model_name == "LLaVA-v1.6-Vicuna":
+            # LLaVA-v1.6 (LlavaNext) uses simpler processing
+            conversation = [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image"},
+                        {"type": "text", "text": prompt}
+                    ]
+                }
+            ]
+            
+            prompt_text = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
+            inputs = self.processor(images=image, text=prompt_text, return_tensors="pt").to(self.device, torch.float16)
+            
+            # Generate
+            with torch.no_grad():
+                generated_ids = self.model.generate(
+                    **inputs,
+                    max_new_tokens=512,
+                    do_sample=False
+                )
+            
+            # Decode only the generated part (exclude input prompt)
+            generated_ids = generated_ids[:, inputs["input_ids"].shape[1]:]
             response = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             
         elif self.model_name == "Pixtral-12B":
