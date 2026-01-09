@@ -9,7 +9,7 @@ This repository provides code and tools for performing **Visual Language Model (
 Currently, the repository supports:
 - BLIP2-Flan-T5-xl
 - Qwen2-VL-7B-Instruct
-
+- InstructBLIP-Vicunna-7B
 ---
 
 ## How to Use the Code
