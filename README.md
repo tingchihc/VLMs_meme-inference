@@ -12,6 +12,12 @@ Currently, the repository supports:
 
 ---
 
+## How to Use the Code
+
+This folder explains how to run inference on meme datasets using the provided VLMs.
+
+---
+
 ## Results
 You can find the results from [Google Drive](https://drive.google.com/drive/u/0/folders/1i_JanAQyi_Ou8X7v12JxcCivEoAaD5cz).
 
