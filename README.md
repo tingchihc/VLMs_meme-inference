@@ -33,6 +33,6 @@ You can find the results from [Google Drive](https://drive.google.com/drive/u/0/
 | LLaVA-v1.6-Vicuna         | 48.86%         |
 | LLaVA-v1.5                | 56.57%         |
 | Pixtral-12B               | 70.00%         |
-| Qwen2-VL-7B-Instruct      | 85.71%         |
 | Qwen3-VL-8B-Instruct.     | 82.00%         |
+| Qwen2-VL-7B-Instruct      | 85.71%         |
 | Qwen2.5-VL-7B-Instruct    | 87.71%         |
