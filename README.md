@@ -25,7 +25,7 @@ This [folder](tutorial/README.md) explains how to run inference on meme datasets
 
 ## Results
 You can find the results from [Google Drive](https://drive.google.com/drive/u/0/folders/1i_JanAQyi_Ou8X7v12JxcCivEoAaD5cz).
-
+<!--
 | VLMs                      | Overall Accuracy | ToxicityAssessment(307) | Scene(6)  | VisualMaterial(13) | TextualMaterial(10) | OverallIntent(5) | BackgroundKnowledge(9) | MarcoAverage |
 |---------------------------|------------------|--------------------|--------|----------------|-----------------|---------------|---------------------|--------------|
 | BLIP2-Flan-T5-xl          | 14.57%           | 14.65%             | 33.33% | 7.69% | 20% | 0% | 11.11% | 14.46% |
@@ -36,3 +36,4 @@ You can find the results from [Google Drive](https://drive.google.com/drive/u/0/
 | Qwen3-VL-8B-Instruct.     | 82.00%           | 80.13%             | 100%   | 100% | 80% | 100% | 100% | 93.35% | 
 | Qwen2-VL-7B-Instruct      | 85.71%           | 84.36%             | 100%   | 92.30% | 90% | 100% | 100% | 94.44% |
 | Qwen2.5-VL-7B-Instruct    | 87.71%           | 86.64%             | 100%   | 100% | 100% | 90% | 80% | 100% | 92.77% |
+-->
