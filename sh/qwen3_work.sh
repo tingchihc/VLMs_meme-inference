@@ -21,4 +21,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate qwen25vl
 
-python VLMs_inference.py  --model_name Qwen3-VL-8B-Instruct --conda_env qwen25vl --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder Qwen3-VL-8B-Instruct
+python VLMs_inference.py  --model_name Qwen3-VL-8B-Instruct --conda_env qwen25vl --input_folder datasets/meme/benchmark_extracted --output_folder Qwen3-VL-8B-Instruct

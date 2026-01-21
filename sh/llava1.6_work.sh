@@ -21,4 +21,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate vicuna_vlm
 
-python VLMs_inference.py  --model_name LLaVA-v1.6-Vicuna --conda_env vicuna_vlm --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder LLaVA-v1.6-Vicuna
+python VLMs_inference.py  --model_name LLaVA-v1.6-Vicuna --conda_env vicuna_vlm --input_folder datasets/meme/benchmark_extracted --output_folder LLaVA-v1.6-Vicuna

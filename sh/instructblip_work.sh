@@ -21,4 +21,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate instructblip
 
-python VLMs_inference.py  --model_name InstructBLIP-Vicunna-7B --conda_env instructblip --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder InstructBLIP-Vicunna-7B
+python VLMs_inference.py  --model_name InstructBLIP-Vicunna-7B --conda_env instructblip --input_folder datasets/meme/benchmark_extracted --output_folder InstructBLIP-Vicunna-7B

@@ -21,4 +21,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate llava
 
-python VLMs_inference.py  --model_name LLaVA-v1.5 --conda_env llava --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder LLaVA-v1.5
+python VLMs_inference.py  --model_name LLaVA-v1.5 --conda_env llava --input_folder datasets/meme/benchmark_extracted --output_folder LLaVA-v1.5

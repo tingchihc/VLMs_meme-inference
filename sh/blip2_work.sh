@@ -21,4 +21,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate blip2_vqa
 
-python VLMs_inference.py  --model_name BLIP2-Flan-T5-xl --conda_env blip2_vqa --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder BLIP2-Flan-T5-xl
+python VLMs_inference.py  --model_name BLIP2-Flan-T5-xl --conda_env blip2_vqa --input_folder datasets/meme/benchmark_extracted --output_folder BLIP2-Flan-T5-xl

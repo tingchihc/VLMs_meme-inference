@@ -21,4 +21,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate pixtral
 
-python VLMs_inference.py  --model_name Pixtral-12B --conda_env pixtral --input_folder /home/tchen1/workshop/datasets/meme/benchmark_extracted --output_folder Pixtral-12B
+python VLMs_inference.py  --model_name Pixtral-12B --conda_env pixtral --input_folder datasets/meme/benchmark_extracted --output_folder Pixtral-12B

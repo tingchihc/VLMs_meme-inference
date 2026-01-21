@@ -84,4 +84,3 @@ dependencies:
       - triton==3.5.1
       - typing-extensions==4.15.0
       - urllib3==2.6.2
-prefix: /home/tchen1/miniconda3/envs/qwen25vl
