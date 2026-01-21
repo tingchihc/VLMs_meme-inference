@@ -1,32 +1,0 @@
-The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
-`torch_dtype` is deprecated! Use `dtype` instead!
-You are using a model of type qwen2_5_vl to instantiate a model of type qwen2_vl. This is not supported for all configurations of models and can yield errors.
-Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:07<00:28,  7.15s/it]Fetching 5 files:  60%|██████    | 3/5 [00:07<00:03,  1.99s/it]Fetching 5 files:  80%|████████  | 4/5 [00:07<00:01,  1.47s/it]Fetching 5 files: 100%|██████████| 5/5 [00:07<00:00,  1.60s/it]
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/5 [00:02<?, ?it/s]
-Traceback (most recent call last):
-  File "/gpfs/home3/tchen1/workshop/VLMs_meme-inference/VLMs_inference.py", line 435, in <module>
-    main()
-  File "/gpfs/home3/tchen1/workshop/VLMs_meme-inference/VLMs_inference.py", line 411, in main
-    vlm = VLMInference(args.model_name)
-  File "/gpfs/home3/tchen1/workshop/VLMs_meme-inference/VLMs_inference.py", line 26, in __init__
-    self.model, self.processor = self._load_model()
-  File "/gpfs/home3/tchen1/workshop/VLMs_meme-inference/VLMs_inference.py", line 82, in _load_model
-    model = Qwen2VLForConditionalGeneration.from_pretrained(
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/modeling_utils.py", line 277, in _wrapper
-    return func(*args, **kwargs)
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/modeling_utils.py", line 5048, in from_pretrained
-    ) = cls._load_pretrained_model(
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/modeling_utils.py", line 5468, in _load_pretrained_model
-    _error_msgs, disk_offload_index = load_shard_file(args)
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/modeling_utils.py", line 843, in load_shard_file
-    disk_offload_index = _load_state_dict_into_meta_model(
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/modeling_utils.py", line 770, in _load_state_dict_into_meta_model
-    _load_parameter_into_model(model, param_name, param.to(param_device))
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/transformers/modeling_utils.py", line 667, in _load_parameter_into_model
-    module.load_state_dict({param_type: tensor}, strict=False, assign=True)
-  File "/home/tchen1/miniconda3/envs/qwen25vl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2629, in load_state_dict
-    raise RuntimeError(
-RuntimeError: Error(s) in loading state_dict for Linear:
-	size mismatch for bias: copying a param with shape torch.Size([3584]) from checkpoint, the shape in current model is torch.Size([1280]).
