@@ -18,7 +18,7 @@ conda activate blip2_vqa
 | VLMs                     | Conda Environment YAML        |
 |---------------------------|------------------------------|
 | BLIP2-Flan-T5-xl          | blip2_environment.yml        |
-| Qwen2-VL-7B-Instruct      | qwen2vl_blip2_environment.yml|
+| Qwen2-VL-7B-Instruct      | qwen2vl_environment.yml|
 | Qwen2.5-VL-7B-Instruct    | qwen25vl_environment.yml     |
 | Qwen3-VL-8B-Instruct.     | qwen25vl_environment.yml     |
 | InstructBLIP-Vicunna-7B.  | instructblip_environment.yml |
