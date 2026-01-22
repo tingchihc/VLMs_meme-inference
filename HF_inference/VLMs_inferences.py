@@ -49,7 +49,7 @@ class VLMInference:
             ).to(self.device)
             
         elif self.model_name == "LLaVA-v1.6-Vicuna":
-            from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
+            #from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
             processor = LlavaNextProcessor.from_pretrained("llava-hf/llava-v1.6-vicuna-7b-hf")
             model = LlavaNextForConditionalGeneration.from_pretrained(
                 "llava-hf/llava-v1.6-vicuna-7b-hf",
@@ -58,7 +58,7 @@ class VLMInference:
             ).to(self.device)
             
         elif self.model_name == "Pixtral-12B":
-            from transformers import LlavaForConditionalGeneration
+            #from transformers import LlavaForConditionalGeneration
             processor = AutoProcessor.from_pretrained(
                 "mistral-community/pixtral-12b",
                 use_fast=False

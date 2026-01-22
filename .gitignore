@@ -1,5 +1,4 @@
-HF_inference/slurm_logs/
-HF_inference/results/
+HF_inference/
 BLIP2-Flan-T5-xl/
 Qwen2-VL-7B-Instruct/
 InstructBLIP-Vicunna-7B/
