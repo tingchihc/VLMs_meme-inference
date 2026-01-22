@@ -42,10 +42,10 @@ class VLMInference:
             ).to(self.device)
             
         elif self.model_name == "LLaVA-v1.5":
-            processor = AutoProcessor.from_pretrained("llava-hf/llava-1.5-7b-hf")
+            processor = AutoProcessor.from_pretrained("llava-hf/llava-1.5-7b-hf", use_fast=True)
             model = LlavaForConditionalGeneration.from_pretrained(
                 "llava-hf/llava-1.5-7b-hf",
-                torch_dtype=torch.float16
+                dtype=torch.float16,
             ).to(self.device)
             
         elif self.model_name == "LLaVA-v1.6-Vicuna":
@@ -272,7 +272,7 @@ def main():
     parser.add_argument("--output_folder", type=str, required=True, help="Path to the output answers")
     args = parser.parse_args()
     
-    dataset = load_dataset("tingcc01/M-QUEST")
+    dataset = load_dataset("xxx/yyy")
     test_set = dataset["test"]
 
     vlm = VLMInference(args.model_name)
