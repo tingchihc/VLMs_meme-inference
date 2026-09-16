@@ -1,6 +1,6 @@
 # VLMs Meme Inference
 
-[![arXiv](https://img.shields.io/badge/arXiv-2603.03315-b31b1b.svg)](https://arxiv.org/abs/2603.03315)  [![Dataset](https://img.shields.io/badge/🤗%20Dataset-Hugging%20Face-yellow)](https://huggingface.co/datasets/vulr/M-QUEST)
+[![arXiv](https://img.shields.io/badge/arXiv-2603.03315-b31b1b.svg)](https://arxiv.org/abs/2603.03315) [![EMNLP 2026](https://img.shields.io/badge/EMNLP-2026-blue)](https://aclanthology.org/) [![Dataset](https://img.shields.io/badge/🤗%20Dataset-Hugging%20Face-yellow)](https://huggingface.co/datasets/vulr/M-QUEST)
 
 <p align="center">
 <img src="images/framework-no-ke.png" alt="intro" width="600" height="600"/>
