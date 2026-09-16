@@ -1,4 +1,4 @@
-# VLMs Meme Inference
+# M-QUEST: VLMs Meme Inference
 
 [![arXiv](https://img.shields.io/badge/arXiv-2603.03315-b31b1b.svg)](https://arxiv.org/abs/2603.03315) [![EMNLP 2026](https://img.shields.io/badge/EMNLP-2026-blue)](https://aclanthology.org/) [![Dataset](https://img.shields.io/badge/🤗%20Dataset-Hugging%20Face-yellow)](https://huggingface.co/datasets/vulr/M-QUEST)
 
@@ -7,7 +7,13 @@
 </p>
 
 ## Introduction
-This repository provides code and tools for performing **Visual Language Model (VLM) inference on memes**. The goal is to leverage state-of-the-art VLMs to analyze and answer questions about meme images, enabling research in **multimodal reasoning and meme understanding**.
+
+This repository contains the VLM inference pipeline developed as part of the [**Semantic Memes**](https://github.com/StenDoipanni/semantic-memes) project. It provides a unified framework for running **Visual Language Models (VLMs)** on meme images and collecting their responses to questions about meme content, semantics, and toxicity.
+
+The inference pipeline supports a range of state-of-the-art VLMs, enabling systematic evaluation of their ability to **understand and reason about multimodal meme content**. The generated model responses can be used for downstream evaluation with **M-QUEST (Meme Question-Understanding Evaluation on Semantics and Toxicity)**, a benchmark designed to assess VLM performance on different aspects of meme understanding.
+
+The repository currently provides inference implementations for several popular VLMs, together with instructions for running them on meme datasets. This makes it possible to reproduce and extend the VLM experiments conducted in our work.
+
 
 ---
 
@@ -31,9 +37,11 @@ This [folder](tutorial/README.md) explains how to run inference on meme datasets
 
 ## Citation
 
+This repository is part of the [**Semantic Memes**](https://github.com/StenDoipanni/semantic-memes) project and contains the VLM inference code used in our experiments.
+
 If you find this work useful, please cite:
 
-```
+```bibtex
 @misc{degiorgis2026mquestmemequestionunderstanding,
       title={M-QUEST -- Meme Question-Understanding Evaluation on Semantics and Toxicity}, 
       author={Stefano De Giorgis and Ting-Chih Chen and Filip Ilievski},
