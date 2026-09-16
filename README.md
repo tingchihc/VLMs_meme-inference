@@ -8,7 +8,7 @@
 
 ## Introduction
 
-This repository contains the VLM inference pipeline developed as part of the [**Semantic Memes**](https://github.com/StenDoipanni/semantic-memes) project. It provides a unified framework for running **Visual Language Models (VLMs)** on meme images and collecting their responses to questions about meme content, semantics, and toxicity.
+This repository contains the VLMs inference pipeline developed as part of the [**Semantic Memes**](https://github.com/StenDoipanni/semantic-memes) project. It provides a unified framework for running **Visual Language Models (VLMs)** on meme images and collecting their responses to questions about meme content, semantics, and toxicity.
 
 The inference pipeline supports a range of state-of-the-art VLMs, enabling systematic evaluation of their ability to **understand and reason about multimodal meme content**. The generated model responses can be used for downstream evaluation with **M-QUEST (Meme Question-Understanding Evaluation on Semantics and Toxicity)**, a benchmark designed to assess VLM performance on different aspects of meme understanding.
 
