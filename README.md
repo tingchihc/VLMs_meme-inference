@@ -33,7 +33,7 @@ This [folder](tutorial/README.md) explains how to run inference on meme datasets
 
 If you find this work useful, please cite:
 
-```bibtex
+```
 @misc{degiorgis2026mquestmemequestionunderstanding,
       title={M-QUEST -- Meme Question-Understanding Evaluation on Semantics and Toxicity}, 
       author={Stefano De Giorgis and Ting-Chih Chen and Filip Ilievski},
