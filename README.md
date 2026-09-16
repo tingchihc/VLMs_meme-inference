@@ -1,5 +1,7 @@
 # VLMs Meme Inference
 
+[![arXiv](https://img.shields.io/badge/arXiv-2603.03315-b31b1b.svg)](https://arxiv.org/abs/2603.03315)  [![Dataset](https://img.shields.io/badge/🤗%20Dataset-Hugging%20Face-yellow)](https://huggingface.co/datasets/vulr/M-QUEST)
+
 ## Introduction
 This repository provides code and tools for performing **Visual Language Model (VLM) inference on memes**. The goal is to leverage state-of-the-art VLMs to analyze and answer questions about meme images, enabling research in **multimodal reasoning and meme understanding**.
 
